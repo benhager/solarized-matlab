@@ -37,6 +37,6 @@ path or **copy** the file file `setupSolarized.m` it to your working folder.
 [ES]: http://ethanschoonover.com
 [ES-Solarized]: http://ethanschoonover.com/solarized
 [SolarizedRepo]: https://github.com/altercation/solarized
-[MC]: http://benhager.com
+[BH]: http://benhager.com
 [LightImg]: https://raw.github.com/mattcan/solarized-idle/master/light.png 
 [DarkImg]: https://raw.github.com/mattcan/solarized-idle/master/dark.png 

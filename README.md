@@ -32,6 +32,18 @@ You can download the files in one of two ways:
 Once the files are on your PC, add the folder `solarized-matlab` to your Matlab 
 path or **copy** the file file `setupSolarized.m` it to your working folder.
 
+### Usage
+
+The `setupSolarized.m` script can be run from the Matlab command window. The file
+must be in current working directory or in another directory that is in your path.
+The type of Solarized theme loaded is based on a string passed to the function
+when it is run. Here are examples of loading the *light* and *dark* themes.
+
+* `>> setupSolarized('light');`
+* `>> setupSolarized('dark');`
+
+This will load the color scheme. Work is being done to add a *default* option here
+that will return the color scheme to Matlab's defaults.
 
 			
 [ES]: http://ethanschoonover.com

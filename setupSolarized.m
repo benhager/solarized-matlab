@@ -18,11 +18,13 @@ function varargout = setupSolarized(varargin) %#ok<STOUT>
 % EXAMPLE:
 %   o setupSolarized('light');
 %   o setupSolarized('dark');
-%   o setupSolarized('default');  <-- not currently working
+%   o setupSolarized('default');
 %===============================================================================
 
 %===============================================================================
 % REVISION HISTORY:
+%   o Add colors setup to return to default
+%       - Wang Yudong / 2015-01-05
 %   o Utilities Toolbox:
 %       - B. Hager / 2013-05-31 <- Original and debugged.
 %
@@ -56,6 +58,18 @@ sol.violet  = [108 113 196] / 256; % violet    #6c71c4 13/5 brmagenta 61 #5f5faf
 sol.blue    = [ 38 139 210] / 256; % blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
 sol.cyan    = [ 42 161 152] / 256; % cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 sol.green   = [133 153   0] / 256; % green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
+mat.black   = [  0   0   0] / 256;
+mat.white   = [255 255 255] / 256;
+mat.blue    = [  0   0 255] / 256;
+mat.green   = [ 34 139  34] / 256;
+mat.violet  = [160  32 240] / 256;
+mat.red178  = [178   0   0] / 256;
+mat.red230  = [230   0   0] / 256;
+mat.golden  = [178 140   0] / 256;
+mat.orange  = [255 148   0] / 256;
+mat.chamois = [238 225 180] / 256;
+mat.iceblue = [202 232 232] / 256;
+mat.persian = [  0 163 163] / 256;
 
 %% Setup Color Scheme for Light/Dark Options
 if strcmp(slrzd,'light')
@@ -75,7 +89,7 @@ if strcmp(slrzd,'light')
 %     ahib = 0;           % Set 'Automatically highlight' checkbox to False
 %     ahi  = sol.violet;  % Set 'Automatically highlight' color
     vwss = sol.green;   % Set 'Variables with shared scope' color
-    clhb = 0;           % Set 'Highlight cells' checkbox to False
+    hsb = 0;            % Set 'Highlight sections' checkbox to False
     hclb = 1;           % Set 'Highlight current line' checkbox to True
     hcl  = sol.base2;   % Set 'Highlight current line' color
     slnb = 1;           % Set 'Show line numbers' checkbox to True
@@ -97,15 +111,33 @@ elseif strcmp(slrzd,'dark')
 %     ahib = 0;           % Set 'Automatically highlight' checkbox to False
 %     ahi  = sol.violet;  % Set 'Automatically highlight' color
     vwss = sol.green;   % Set 'Variables with shared scope' color
-    clhb = 0;           % Set 'Highlight cells' checkbox to False
+    hsb = 0;            % Set 'Highlight sections' checkbox to False
     hclb = 1;           % Set 'Highlight current line' checkbox to True
     hcl  = sol.base02;  % Set 'Highlight current line' color
     slnb = 1;           % Set 'Show line numbers' checkbox to True
     rtlb = 1;           % Set 'Show line' checkbox in Right-hand text limit to True
-else
-%     sycb = 1;           % Set 'Use system colors' checkbox to True
-    % Need to get colors setup to return to default
-    return
+elseif strcmp(slrzd,'default')
+    sycb = 1;           % Set 'Use system colors' checkbox to True
+    txc  = mat.black;   % Set 'Text' color
+    bgc  = mat.white;   % Set 'Background' color
+    kwd  = mat.blue;    % Set 'Keywords' color
+    cmt  = mat.green;   % Set 'Comments' color - spec calls for base1, not sure about that...
+    str  = mat.violet;  % Set 'Strings' color
+    ustr = mat.red178;  % Set 'Unterminated strings' color
+    scmd = mat.golden;  % Set 'System commands' color
+    errs = mat.red230;  % Set 'Errors' color
+    hyp  = mat.blue;    % Set 'Hyperlinks' color
+    warn = mat.orange;  % Set 'Warnings' color
+    afhb = 1;           % Set 'Autofix highlight' checkbox to True
+    afh  = mat.chamois; % Set 'Autofix highlight' color
+%     ahib = 1;           % Set 'Automatically highlight' checkbox to True
+%     ahi  = mat.iceblue; % Set 'Automatically highlight' color
+    vwss = mat.persian; % Set 'Variables with shared scope' color
+    hsb  = 0;           % Set 'Highlight sections' checkbox to False
+    hclb = 0;           % Set 'Highlight current line' checkbox to False
+    hcl  = sol.base2;   % Set 'Highlight current line' color
+    slnb = 1;           % Set 'Show line numbers' checkbox to True
+    rtlb = 1;           % Set 'Show line' checkbox in Right-hand text limit to True
 end
 
 %% Desktop tool colors
@@ -157,9 +189,10 @@ com.mathworks.services.ColorPrefs.notifyColorListeners('ColorsMLintAutoFixBackgr
 com.mathworks.services.Prefs.setColorPref('Editor.NonlocalVariableHighlighting.TextColor',java.awt.Color(vwss(1), vwss(2), vwss(3)));
 com.mathworks.services.ColorPrefs.notifyColorListeners('Editor.NonlocalVariableHighlighting.TextColor');clear('vwss')
 
-%% Cell display options
-com.mathworks.services.Prefs.setBooleanPref('EditorCodepadHighVisible',clhb); clear('clhb')
-% Highlight cells color is 'Editorhighlight-lines'
+%% Section display options
+com.mathworks.services.Prefs.setBooleanPref('EditorCodepadHighVisible',hsb);clear('hsb');
+% <pref-name> of 'Highlight sections' color is 'Editorhighlight-lines'
+% EXAMPLE: com.mathworks.services.Prefs.setColorPref('Editorhighlight-lines', java.awt.Color(...));
 
 %% Editor/Debugger General display options
 com.mathworks.services.Prefs.setBooleanPref('Editorhighlight-caret-row-boolean',hclb);
@@ -175,3 +208,4 @@ clear('rtlb')
 
 %% Cleanup
 clear('sol')
+clear('mat')

@@ -2,8 +2,6 @@
 
 ## Precision colors for machines and people
 
----
-
 ### Solarized
 
 Solarized was created by [Ethan Schoonover][ES] and you can find out more

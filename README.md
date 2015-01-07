@@ -2,8 +2,6 @@
 
 ## Precision colors for machines and people
 
----
-
 ### Solarized
 
 Solarized was created by [Ethan Schoonover][ES] and you can find out more
@@ -15,17 +13,24 @@ ports in one place.
 ### Solarized for MATLAB
 
 Solarized was initially ported for MATLAB by [Ben Hager][BH] and can be
-found at <https://github.com/benhager/solarized-matlab>.
+found at <https://github.com/benhager/solarized-matlab>. [Wang Yudong][wyudong] add
+color setup to restore Matlab's defaults.
 
 ### Screenshots
 
-Coming soon...
+Solarized Light Color Scheme
+
+![LightImg](https://github.com/wyudong/solarized-matlab/blob/master/screenshots/light-theme.png)
+
+Solarized Dark Color Scheme
+
+![DarkImg](https://github.com/wyudong/solarized-matlab/blob/master/screenshots/dark-theme.png)
 
 ### Installation
 
 You can download the files in one of two ways:
 
-* using `git clone git://github.com/benhager/solarized-matlab.git`
+* using `git clone git://github.com/wyudong/solarized-matlab.git`
 * using the **Download** button to get the ZIP file and extracting the files to
   a folder
 
@@ -42,13 +47,14 @@ when it is run. Here are examples of loading the *light* and *dark* themes.
 * `>> setupSolarized('light');`
 * `>> setupSolarized('dark');`
 
-This will load the color scheme. Work is being done to add a *default* option here
-that will return the color scheme to Matlab's defaults.
+This will load the color scheme. 
 
-			
+* `>> setupSolarized('default');`
+
+Now restore the color scheme to Matlab's *default* option is also supported.
+
 [ES]: http://ethanschoonover.com
 [ES-Solarized]: http://ethanschoonover.com/solarized
 [SolarizedRepo]: https://github.com/altercation/solarized
 [BH]: http://benhager.com
-[LightImg]: https://raw.github.com/mattcan/solarized-idle/master/light.png 
-[DarkImg]: https://raw.github.com/mattcan/solarized-idle/master/dark.png 
+[wyudong]: http://wyudong.com

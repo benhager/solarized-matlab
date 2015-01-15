@@ -70,6 +70,7 @@ mat.orange  = [255 148   0] / 256;
 mat.chamois = [238 225 180] / 256;
 mat.iceblue = [202 232 232] / 256;
 mat.persian = [  0 163 163] / 256;
+mat.yellow  = [252 252 220] / 256;
 
 %% Setup Color Scheme for Light/Dark Options
 if strcmp(slrzd,'light')
@@ -89,7 +90,8 @@ if strcmp(slrzd,'light')
 %     ahib = 0;           % Set 'Automatically highlight' checkbox to False
 %     ahi  = sol.violet;  % Set 'Automatically highlight' color
     vwss = sol.green;   % Set 'Variables with shared scope' color
-    hsb = 0;            % Set 'Highlight sections' checkbox to False
+    hsb  = 0;           % Set 'Highlight sections' checkbox to False
+    hsbc = mat.yellow;  % Set 'Highlight sections' color to default yellow
     hclb = 1;           % Set 'Highlight current line' checkbox to True
     hcl  = sol.base2;   % Set 'Highlight current line' color
     slnb = 1;           % Set 'Show line numbers' checkbox to True
@@ -111,7 +113,8 @@ elseif strcmp(slrzd,'dark')
 %     ahib = 0;           % Set 'Automatically highlight' checkbox to False
 %     ahi  = sol.violet;  % Set 'Automatically highlight' color
     vwss = sol.green;   % Set 'Variables with shared scope' color
-    hsb = 0;            % Set 'Highlight sections' checkbox to False
+    hsb  = 0;           % Set 'Highlight sections' checkbox to False
+    hsbc = sol.base02;  % Set 'Highlight sections' color to default yellow
     hclb = 1;           % Set 'Highlight current line' checkbox to True
     hcl  = sol.base02;  % Set 'Highlight current line' color
     slnb = 1;           % Set 'Show line numbers' checkbox to True
@@ -130,10 +133,11 @@ elseif strcmp(slrzd,'default')
     warn = mat.orange;  % Set 'Warnings' color
     afhb = 1;           % Set 'Autofix highlight' checkbox to True
     afh  = mat.chamois; % Set 'Autofix highlight' color
-%     ahib = 1;           % Set 'Automatically highlight' checkbox to True
+%     ahib = true;        % Set 'Automatically highlight' checkbox to True
 %     ahi  = mat.iceblue; % Set 'Automatically highlight' color
     vwss = mat.persian; % Set 'Variables with shared scope' color
-    hsb  = 0;           % Set 'Highlight sections' checkbox to False
+    hsb  = 1;           % Set 'Highlight sections' checkbox to True
+    hsbc = mat.yellow;  % Set 'Highlight sections' color to default yellow
     hclb = 0;           % Set 'Highlight current line' checkbox to False
     hcl  = sol.base2;   % Set 'Highlight current line' color
     slnb = 1;           % Set 'Show line numbers' checkbox to True
@@ -190,9 +194,9 @@ com.mathworks.services.Prefs.setColorPref('Editor.NonlocalVariableHighlighting.T
 com.mathworks.services.ColorPrefs.notifyColorListeners('Editor.NonlocalVariableHighlighting.TextColor');clear('vwss')
 
 %% Section display options
-com.mathworks.services.Prefs.setBooleanPref('EditorCodepadHighVisible',hsb);clear('hsb');
-% <pref-name> of 'Highlight sections' color is 'Editorhighlight-lines'
-% EXAMPLE: com.mathworks.services.Prefs.setColorPref('Editorhighlight-lines', java.awt.Color(...));
+com.mathworks.services.Prefs.setBooleanPref('EditorCodepadHighVisible',hsb);
+com.mathworks.services.Prefs.setColorPref('Editorhighlight-lines', java.awt.Color(hsbc(1), hsbc(2), hsbc(3)));
+clear('hsb','hsbc');
 
 %% Editor/Debugger General display options
 com.mathworks.services.Prefs.setBooleanPref('Editorhighlight-caret-row-boolean',hclb);
